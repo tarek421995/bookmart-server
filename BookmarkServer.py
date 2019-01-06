@@ -48,7 +48,7 @@ def CheckURI(uri, timeout=5):
         return False
 
 
-class Shortener(http.server.BaseHTTPRequestHandler):
+class Shortener(http.server.BaseHTTPRequestHandler,Thread):
     def do_GET(self):
         # A GET request will either be for / (the root path) or for /some-name.
         # Strip off the / and we have either empty string or a name.
@@ -102,5 +102,5 @@ class Shortener(http.server.BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     server_address = ('', int(os.environ.get('PORT', '8000')))
-    httpd = http.server.ThreadHTTPServer(server_address, Shortener)
+    httpd = http.server.ThreadHTTPServer(server_address=server_addresser, Shortener=Shortener)
     httpd.serve_forever()
