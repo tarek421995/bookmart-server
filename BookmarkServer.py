@@ -2,7 +2,7 @@
 #
 # A *bookmark server* or URI shortener.
 import threading
-from socketserver import ThreadingMi
+from socketserver import ThreadingMixIn
 
 
 import http.server
@@ -102,5 +102,5 @@ class Shortener(http.server.BaseHTTPRequestHandler,Thread):
 
 if __name__ == '__main__':
     server_address = ('', int(os.environ.get('PORT', '8000')))
-    httpd = http.server.ThreadHTTPServer(server_address=server_addresser, Shortener=Shortener)
+    httpd = http.server.ThreadHTTPServer(server_address, Shortener)
     httpd.serve_forever()
