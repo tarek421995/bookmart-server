@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 #
 # A *bookmark server* or URI shortener.
-import threading
-from socketserver import ThreadingMixIn
-
 
 import http.server
 import requests
@@ -102,5 +99,5 @@ class Shortener(http.server.BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     server_address = ('', int(os.environ.get('PORT', '8000')))
-    httpd = http.server.ThreadHTTPServer(server_address, Shortener)
+    httpd = http.server.HTTPServer(server_address, Shortener)
     httpd.serve_forever()
